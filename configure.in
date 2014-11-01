@@ -237,7 +237,7 @@ esac
 LIBZMQ_CHECK_DOC_BUILD
 
 # Check polling system
-LIBZMQ_CHECK_POLLER([CPPFLAGS="${CPPFLAGS} -D${libzmq_cv_poller_flag}"],
+LIBZMQ_CHECK_POLLER([CPPFLAGS="${CPPFLAGS} -DZMQ_FORCE_POLL"],
                     [AC_MSG_ERROR([Unable to continue without polling system])])
 
 # Checks for header files.
