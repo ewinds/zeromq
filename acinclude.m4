@@ -890,8 +890,8 @@ AC_DEFUN([LIBZMQ_CHECK_POLLER], [{
 
         *)
             # try to find suitable polling system. the order of testing is:
-            # kqueue -> epoll -> devpoll -> poll -> select
-            for subsystem in kqueue epoll devpoll poll select; do
+            # poll -> kqueue -> epoll -> devpoll -> select
+            for subsystem in poll kqueue epoll devpoll select; do
 
                 case "${subsystem}" in
                     kqueue)
@@ -922,8 +922,7 @@ AC_DEFUN([LIBZMQ_CHECK_POLLER], [{
       ;;
     esac
 
-    # libzmq_cv_poller_flag=`echo "ZMQ_FORCE_${libzmq_cv_poller}" | tr a-z A-Z`
-    libzmq_cv_poller_flag=`echo "ZMQ_FORCE_POLL" | tr a-z A-Z`
+    libzmq_cv_poller_flag=`echo "ZMQ_FORCE_${libzmq_cv_poller}" | tr a-z A-Z`
 
     AS_IF([test "x${libzmq_cv_poller}" != "x"],
           [AC_MSG_RESULT([using $libzmq_cv_poller]) ; $1], [AC_MSG_RESULT(no suitable polling system found) ; $2])
